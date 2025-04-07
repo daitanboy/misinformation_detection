@@ -1,57 +1,127 @@
-misinformation_detection
-==============================
+# Misinformation Detection on Social Media
 
-A predictive analytics project to detect misinformation on social media
+## 📌 Project Description
 
-Project Organization
-------------
+This project uses predictive analytics and natural language processing (NLP) to detect text-based misinformation on social media platforms. By analyzing language patterns, engagement metrics, and post timing, the models aim to flag fake news content before it spreads. The project focuses on building and evaluating machine learning models such as Logistic Regression, Random Forest, and BERT using datasets from Kaggle and Twitter/X API.
 
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+---
 
+## ⚙️ Dependencies
 
---------
+All dependencies are listed in `requirements.txt` or `environment.yml`, but key packages include:
 
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+- Python 3.9+
+- pandas
+- numpy
+- scikit-learn
+- matplotlib / seaborn
+- nltk
+- transformers
+- jupyter
+- requests
+- kagglehub
+
+To install everything:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 🛠️ Setup Instructions
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/daitanboy/misinformation_detection.git
+cd misinformation_detection
+```
+
+### 2. Create and activate a virtual environment (recommended)
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 🔄 Running the Data Pipeline
+
+The project is structured using the Cookiecutter Data Science template. Follow these steps:
+
+### 1. Load and clean the datasets:
+
+```bash
+python src/data/make_dataset.py
+```
+
+### 2. Feature engineering:
+
+```bash
+python src/features/build_features.py
+```
+
+---
+
+## 🤖 Model Training and Evaluation
+
+### 1. Train the model:
+
+```bash
+python src/models/train_model.py
+```
+
+### 2. Evaluate performance:
+
+```bash
+python src/models/predict_model.py
+```
+
+This script prints classification metrics and saves charts to `reports/figures/`.
+
+---
+
+## 🔁 Reproducing Results
+
+To reproduce the full pipeline from scratch:
+
+1. Download the raw datasets to `data/raw/`
+2. Run:
+```bash
+python src/data/make_dataset.py
+python src/features/build_features.py
+python src/models/train_model.py
+python src/models/predict_model.py
+```
+3. View outputs in `models/` and `reports/figures/`
+
+---
+
+## 📁 Project Structure
+
+```
+.
+├── data/              # Raw, interim, and processed data
+├── notebooks/         # Jupyter notebooks for EDA and modeling
+├── src/               # Modular source code
+├── models/            # Saved model files
+├── reports/           # Visualizations and final reports
+├── requirements.txt   # Python dependencies
+├── README.md          # Project overview (this file)
+```
+
+---
+
+## ✍️ Author
+
+**Carlos Lopez Vento**  
+Information Science @ University of Maryland  
+[GitHub Profile](https://github.com/daitanboy)
