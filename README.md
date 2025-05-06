@@ -1,127 +1,121 @@
 # Misinformation Detection on Social Media
 
-## 📌 Project Description
+## Project Overview
 
-This project uses predictive analytics and natural language processing (NLP) to detect text-based misinformation on social media platforms. By analyzing language patterns, engagement metrics, and post timing, the models aim to flag fake news content before it spreads. The project focuses on building and evaluating machine learning models such as Logistic Regression, Random Forest, and BERT using datasets from Kaggle and Twitter/X API.
+This project applies machine learning and natural language processing (NLP) to detect text-based misinformation on social media platforms. The goal is to flag potentially harmful content early—before it goes viral—by training predictive models on real-world datasets. The final model achieves over 90% F1-score using TF-IDF features and logistic regression, with additional models evaluated for robustness.
 
----
+Datasets include a labeled Kaggle fake/true news set and real-time posts pulled from the X (Twitter) API. All code follows the Cookiecutter Data Science structure.
 
-## ⚙️ Dependencies
+## Features & Models
 
-All dependencies are listed in `requirements.txt` or `environment.yml`, but key packages include:
+- Data cleaning & preprocessing (Twitter + Kaggle)
+- TF-IDF vectorization
+- Logistic Regression (best performance)
+- Random Forest & XGBoost comparisons
+- Real-time tweet inference via Twitter API
+- Visualizations: confusion matrices, F1 score comparison
+- Final Sprint 3 report and presentation
 
-- Python 3.9+
-- pandas
-- numpy
-- scikit-learn
-- matplotlib / seaborn
-- nltk
-- transformers
-- jupyter
-- requests
-- kagglehub
+## Requirements
 
-To install everything:
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+Main libraries used:
 
-## 🛠️ Setup Instructions
+- pandas, numpy
+- scikit-learn, xgboost
+- matplotlib, seaborn
+- nltk
+- tweepy (Twitter API)
+- jupyter
 
-### 1. Clone the repository
+## Setup & Running the Project
+
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/daitanboy/misinformation_detection.git
 cd misinformation_detection
 ```
 
-### 2. Create and activate a virtual environment (recommended)
+### 2. Optional: Create a Virtual Environment
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate
+source venv/bin/activate  # or venv\Scripts\activate on Windows
 ```
 
-### 3. Install dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+## Running the Workflow
 
-## 🔄 Running the Data Pipeline
+This project uses a modular pipeline:
 
-The project is structured using the Cookiecutter Data Science template. Follow these steps:
-
-### 1. Load and clean the datasets:
+### Step 1: Load and Clean the Data
 
 ```bash
-python src/data/make_dataset.py
+python src/data/prepare_data.py
 ```
 
-### 2. Feature engineering:
+### Step 2: Apply TF-IDF Vectorization
 
 ```bash
 python src/features/build_features.py
 ```
 
----
-
-## 🤖 Model Training and Evaluation
-
-### 1. Train the model:
+### Step 3: Train Models
 
 ```bash
 python src/models/train_model.py
 ```
 
-### 2. Evaluate performance:
+### Step 4: Test Live Tweet Predictions
+
+Make sure you configure your Twitter API bearer token.
 
 ```bash
-python src/models/predict_model.py
+python src/models/predict_live.py
 ```
 
-This script prints classification metrics and saves charts to `reports/figures/`.
-
----
-
-## 🔁 Reproducing Results
-
-To reproduce the full pipeline from scratch:
-
-1. Download the raw datasets to `data/raw/`
-2. Run:
-```bash
-python src/data/make_dataset.py
-python src/features/build_features.py
-python src/models/train_model.py
-python src/models/predict_model.py
-```
-3. View outputs in `models/` and `reports/figures/`
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```
-.
-├── data/              # Raw, interim, and processed data
-├── notebooks/         # Jupyter notebooks for EDA and modeling
-├── src/               # Modular source code
-├── models/            # Saved model files
-├── reports/           # Visualizations and final reports
-├── requirements.txt   # Python dependencies
-├── README.md          # Project overview (this file)
+misinformation_detection/
+├── data/              # Raw and processed datasets
+├── docs/              # Additional documentation (optional)
+├── models/            # Saved model files (.pkl, etc.)
+├── notebooks/         # Jupyter notebooks (main = Sprint_3.ipynb)
+├── references/        # Research references or data dictionaries
+├── reports/           # Final report and presentation slides
+│   └── figures/       # Confusion matrix, model comparisons, etc.
+├── src/               # Source code modules
+│   ├── data/
+│   ├── features/
+│   ├── models/
+│   └── visualization/
+├── requirements.txt
+├── README.md
+└── .gitignore
 ```
 
----
+## Results
 
-## ✍️ Author
+- Best Model: Logistic Regression
+- F1 Score: ~92%
+- Use Case: Supports NGOs or platforms in flagging misleading posts
 
-**Carlos Lopez Vento**  
+Visuals and evaluation results are saved in `reports/figures/`.
+
+## Author
+
+Carlos Lopez Vento  
 Information Science @ University of Maryland  
-[GitHub Profile](https://github.com/daitanboy)
+https://github.com/daitanboy
