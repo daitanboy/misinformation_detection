@@ -77,7 +77,7 @@ python src/features/build_features.py
 python src/models/train_model.py
 ```
 
-### Step 4: Test Live Tweet Predictions
+### Step 4: Test Live Tweet Predictions (optional)
 
 Make sure you configure your Twitter API bearer token.
 
@@ -89,8 +89,7 @@ python src/models/predict_live.py
 
 ```
 misinformation_detection/
-├── data/              # Raw and processed datasets
-├── docs/              # Additional documentation (optional)
+├── docs/              # Additional documentation
 ├── models/            # Saved model files (.pkl, etc.)
 ├── notebooks/         # Jupyter notebooks (main = Sprint_3.ipynb)
 ├── references/        # Research references or data dictionaries
@@ -105,6 +104,25 @@ misinformation_detection/
 ├── README.md
 └── .gitignore
 ```
+
+## Dataset Access
+
+This project uses two main datasets. Due to GitHub file size restrictions, the raw data files are not included in the repository. Follow the steps below to download and organize them locally:
+
+### 1. Kaggle Fake News Dataset
+- Source: https://www.kaggle.com/datasets/emineyetm/fake-news-detection-datasets
+- Files required:
+  - True.csv
+  - Fake.csv
+- After downloading, place both files in:
+  ```
+  data/raw/
+  ```
+
+### 2. Twitter (X) API - Live Tweet Data
+- Tweets are fetched dynamically using the Twitter API and the `predict_live.py` script.
+- You’ll need a valid Bearer Token from Twitter’s Developer Platform.
+- Insert your token into the `predict_live.py` script where indicated.
 
 ## Results
 
