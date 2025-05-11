@@ -2,36 +2,39 @@
 
 ## Project Overview
 
-This project applies machine learning and natural language processing (NLP) to detect text-based misinformation on social media platforms. The goal is to flag potentially harmful content early—before it goes viral—by training predictive models on real-world datasets. The final model achieves over 90% F1-score using TF-IDF features and logistic regression, with additional models evaluated for robustness.
+This project leverages machine learning (ML) and natural language processing (NLP) to detect and classify misinformation on social media platforms like Twitter/X. The goal is to flag potentially harmful content early—before it spreads—using predictive models trained on real-world datasets. The final model achieves over 90% F1-score with Logistic Regression, and other models like Random Forest and XGBoost are also evaluated for robustness.
 
-Datasets include a labeled Kaggle fake/true news set and real-time posts pulled from the X (Twitter) API. All code follows the Cookiecutter Data Science structure.
+Datasets used include:
+- A labeled Kaggle Fake/True News dataset
+- Real-time posts fetched from the Twitter API
+
+All code follows the **Cookiecutter Data Science** structure, ensuring modularity and clarity in the pipeline.
 
 ## Features & Models
 
-- Data cleaning & preprocessing (Twitter + Kaggle)
-- TF-IDF vectorization
-- Logistic Regression (best performance)
-- Random Forest & XGBoost comparisons
-- Real-time tweet inference via Twitter API
-- Visualizations: confusion matrices, F1 score comparison
-- Final Sprint 3 report and presentation
+- **Data Cleaning & Preprocessing** (Twitter + Kaggle)
+- **TF-IDF Vectorization** for feature extraction
+- **Logistic Regression** (best performing model)
+- Comparisons with **Random Forest** and **XGBoost**
+- Real-time predictions using the **Twitter API**
+- Visualizations: **Confusion Matrices** and **F1 Score Comparison**
+- Final Sprint 3 Report and Presentation
 
 ## Requirements
 
-Install dependencies:
+To run the project, install the dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
 Main libraries used:
-
-- pandas, numpy
-- scikit-learn, xgboost
-- matplotlib, seaborn
-- nltk
-- tweepy (Twitter API)
-- jupyter
+- **pandas**, **numpy**
+- **scikit-learn**, **xgboost**
+- **matplotlib**, **seaborn**
+- **nltk**
+- **tweepy** (Twitter API)
+- **jupyter**
 
 ## Setup & Running the Project
 
@@ -46,7 +49,7 @@ cd misinformation_detection
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
+source venv/bin/activate  # on Windows: venv\Scriptsctivate
 ```
 
 ### 3. Install Dependencies
@@ -57,30 +60,25 @@ pip install -r requirements.txt
 
 ## Running the Workflow
 
-This project uses a modular pipeline:
+This project follows a modular pipeline:
 
 ### Step 1: Load and Clean the Data
-
 ```bash
 python src/data/prepare_data.py
 ```
 
 ### Step 2: Apply TF-IDF Vectorization
-
 ```bash
 python src/features/build_features.py
 ```
 
 ### Step 3: Train Models
-
 ```bash
 python src/models/train_model.py
 ```
 
-### Step 4: Test Live Tweet Predictions (optional)
-
-Make sure you configure your Twitter API bearer token.
-
+### Step 4: Test Live Tweet Predictions (Optional)
+Make sure to configure your Twitter API **Bearer Token**.
 ```bash
 python src/models/predict_live.py
 ```
@@ -90,16 +88,16 @@ python src/models/predict_live.py
 ```
 misinformation_detection/
 ├── docs/              # Additional documentation
-├── models/            # Saved model files (.pkl, etc.)
+├── models/            # Saved model files (.pkl)
 ├── notebooks/         # Jupyter notebooks (main = Sprint_3.ipynb)
-├── references/        # Research references or data dictionaries
+├── references/        # Research papers or data dictionaries
 ├── reports/           # Final report and presentation slides
-│   └── figures/       # Confusion matrix, model comparisons, etc.
+│   └── figures/       # Confusion matrix, model comparisons
 ├── src/               # Source code modules
-│   ├── data/
-│   ├── features/
-│   ├── models/
-│   └── visualization/
+│   ├── data/          # Data loading and cleaning
+│   ├── features/      # Feature engineering (TF-IDF, etc.)
+│   ├── models/        # Model training and evaluation
+│   └── visualization/ # Graphs and visual outputs
 ├── requirements.txt
 ├── README.md
 └── .gitignore
@@ -107,33 +105,32 @@ misinformation_detection/
 
 ## Dataset Access
 
-This project uses two main datasets. Due to GitHub file size restrictions, the raw data files are not included in the repository. Follow the steps below to download and organize them locally:
+The datasets are not included in the repository due to size limitations. You will need to download and organize them locally.
 
 ### 1. Kaggle Fake News Dataset
 - Source: https://www.kaggle.com/datasets/emineyetm/fake-news-detection-datasets
-- Files required:
-  - True.csv
-  - Fake.csv
-- After downloading, place both files in:
+- Files:
+  - `True.csv`
+  - `Fake.csv`
+- Place these files in:
   ```
   data/raw/
   ```
 
 ### 2. Twitter (X) API - Live Tweet Data
-- Tweets are fetched dynamically using the Twitter API and the `predict_live.py` script.
-- You’ll need a valid Bearer Token from Twitter’s Developer Platform.
-- Insert your token into the `predict_live.py` script where indicated.
+- Tweets are pulled dynamically using the **Twitter API** and the script `predict_live.py`.
+- To fetch live data, you’ll need a valid **Bearer Token** from Twitter’s Developer Platform.
+- Insert the token into the script as indicated in `predict_live.py`.
 
 ## Results
 
-- Best Model: Logistic Regression
-- F1 Score: ~92%
-- Use Case: Supports NGOs or platforms in flagging misleading posts
-
-Visuals and evaluation results are saved in `reports/figures/`.
+- **Best Model**: Logistic Regression
+- **F1 Score**: ~92%
+- **Use Case**: Supports NGOs and platforms in flagging misleading posts.
+- Visuals and evaluation results are saved in `reports/figures/`.
 
 ## Author
 
 Carlos Lopez Vento  
 Information Science @ University of Maryland  
-https://github.com/daitanboy
+[GitHub Profile](https://github.com/daitanboy)
