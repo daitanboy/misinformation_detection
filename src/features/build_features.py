@@ -1,12 +1,4 @@
-"""
-build_features.py
-Applies TF-IDF vectorization.
-"""
-
-from sklearn.feature_extraction.text import TfidfVectorizer
-
-def get_vectorizer():
-    return TfidfVectorizer(max_features=5000)
-
-def vectorize_text(vectorizer, text_data):
-    return vectorizer.fit_transform(text_data)
+# Apply TF-IDF vectorization
+tfidf_vectorizer = TfidfVectorizer(max_features=5000)
+X = tfidf_vectorizer.fit_transform(df_combined['text'])
+y = df_combined['label']
