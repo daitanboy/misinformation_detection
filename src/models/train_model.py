@@ -33,6 +33,22 @@ grid_xgb.fit(X_train, y_train)
 best_xgb = grid_xgb.best_estimator_
 print("Best XGBoost Model:", best_xgb)
 
+# Model Comparison (Cross-Validation)
+models = {
+    'Logistic Regression': best_lr,
+    'Random Forest': best_rf,
+    'XGBoost': best_xgb
+}
+
+scores = [cross_val_score(model, X_train, y_train, cv=3, scoring='f1', n_jobs=-1).mean() for model in models.values()]
+
+# Plotting the F1 scores of each model
+plt.bar(models.keys(), scores)
+plt.title('Model F1 Score Comparison (Cross-Validated)')
+plt.ylabel('F1 Score (CV=3)')
+plt.ylim(0.9, 1.01)
+plt.show()
+
 # Error Analysis
 # Generating predictions using the best model (Random Forest)
 y_pred = best_rf.predict(X_test)
