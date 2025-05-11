@@ -3,6 +3,11 @@ from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from sklearn.model_selection import GridSearchCV
 import joblib
+from sklearn.metrics import confusion_matrix
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
 
 # Load the data from the previous step (train/test split)
 X_train, X_test, y_train, y_test = joblib.load('train_test_split_data.pkl')
@@ -27,3 +32,29 @@ grid_xgb = GridSearchCV(XGBClassifier(eval_metric='logloss'), param_grid_xgb, cv
 grid_xgb.fit(X_train, y_train)
 best_xgb = grid_xgb.best_estimator_
 print("Best XGBoost Model:", best_xgb)
+
+# Error Analysis
+# Generating predictions using the best model (Random Forest)
+y_pred = best_rf.predict(X_test)
+
+# Identifying misclassified samples
+misclassified_indices = np.where(y_test.values != y_pred)[0]
+X_test_df = pd.DataFrame(X_test.toarray())  # Ensure this matches how you transform features
+wrong_samples = X_test_df.iloc[misclassified_indices]
+
+# Extracting misclassified original texts
+original_texts = df_combined.iloc[y_test.index[misclassified_indices]]
+misclassified_samples = original_texts[['text', 'label']]
+
+# Print misclassified samples
+print("Misclassified samples:\n", misclassified_samples.head(10))
+
+# Creating a word cloud for the misclassified samples
+text = ' '.join(misclassified_samples['text'].values) 
+wordcloud = WordCloud(max_words=100, background_color='white').generate(text)
+
+# Displaying the word cloud
+plt.figure(figsize=(8, 6))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+plt.show()
