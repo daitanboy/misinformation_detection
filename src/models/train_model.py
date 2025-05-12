@@ -2,10 +2,12 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from sklearn.model_selection import GridSearchCV, cross_val_score
+from sklearn.metrics import confusion_matrix
 import joblib
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Load train/test data
 X_train, X_test, y_train, y_test = joblib.load('train_test_split_data.pkl')
@@ -36,15 +38,46 @@ print("Best XGBoost Model:", best_xgb)
 models = {'Logistic Regression': best_lr, 'Random Forest': best_rf, 'XGBoost': best_xgb}
 scores = [cross_val_score(model, X_train, y_train, cv=3, scoring='f1').mean() for model in models.values()]
 
-# Plot the comparison
+# Plot the comparison of F1 scores
 plt.bar(models.keys(), scores)
 plt.title('Model F1 Score Comparison')
 plt.ylabel('F1 Score')
 plt.ylim(0.9, 1.01)
 plt.show()
 
+# Predictions and confusion matrix for each model
+
+# Logistic Regression Confusion Matrix
+y_pred_lr = best_lr.predict(X_test)
+cm_lr = confusion_matrix(y_test, y_pred_lr)
+plt.figure(figsize=(6, 4))
+sns.heatmap(cm_lr, annot=True, fmt='d', cmap='Blues', xticklabels=['Fake', 'Real'], yticklabels=['Fake', 'Real'])
+plt.title('Confusion Matrix for Logistic Regression')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.show()
+
+# Random Forest Confusion Matrix
+y_pred_rf = best_rf.predict(X_test)
+cm_rf = confusion_matrix(y_test, y_pred_rf)
+plt.figure(figsize=(6, 4))
+sns.heatmap(cm_rf, annot=True, fmt='d', cmap='Blues', xticklabels=['Fake', 'Real'], yticklabels=['Fake', 'Real'])
+plt.title('Confusion Matrix for Random Forest')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.show()
+
+# XGBoost Confusion Matrix
+y_pred_xgb = best_xgb.predict(X_test)
+cm_xgb = confusion_matrix(y_test, y_pred_xgb)
+plt.figure(figsize=(6, 4))
+sns.heatmap(cm_xgb, annot=True, fmt='d', cmap='Blues', xticklabels=['Fake', 'Real'], yticklabels=['Fake', 'Real'])
+plt.title('Confusion Matrix for XGBoost')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.show()
+
 # Error analysis with Random Forest
-y_pred = best_rf.predict(X_test)
-misclassified_indices = np.where(y_test != y_pred)[0]
+misclassified_indices = np.where(y_test != y_pred_rf)[0]
 misclassified_samples = df_combined.iloc[misclassified_indices][['text', 'label']]
 print("Misclassified samples:\n", misclassified_samples.head())
