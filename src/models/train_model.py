@@ -2,7 +2,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from sklearn.model_selection import GridSearchCV, cross_val_score
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, f1_score
 import joblib
 import pandas as pd
 import numpy as np
@@ -47,9 +47,12 @@ plt.show()
 
 # Predictions and confusion matrix for each model
 
-# Logistic Regression Confusion Matrix
+# Logistic Regression Confusion Matrix and F1 Score
 y_pred_lr = best_lr.predict(X_test)
 cm_lr = confusion_matrix(y_test, y_pred_lr)
+f1_lr = f1_score(y_test, y_pred_lr)
+print(f"Logistic Regression F1 Score: {f1_lr}")
+
 plt.figure(figsize=(6, 4))
 sns.heatmap(cm_lr, annot=True, fmt='d', cmap='Blues', xticklabels=['Fake', 'Real'], yticklabels=['Fake', 'Real'])
 plt.title('Confusion Matrix for Logistic Regression')
@@ -57,9 +60,12 @@ plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.show()
 
-# Random Forest Confusion Matrix
+# Random Forest Confusion Matrix and F1 Score
 y_pred_rf = best_rf.predict(X_test)
 cm_rf = confusion_matrix(y_test, y_pred_rf)
+f1_rf = f1_score(y_test, y_pred_rf)
+print(f"Random Forest F1 Score: {f1_rf}")
+
 plt.figure(figsize=(6, 4))
 sns.heatmap(cm_rf, annot=True, fmt='d', cmap='Blues', xticklabels=['Fake', 'Real'], yticklabels=['Fake', 'Real'])
 plt.title('Confusion Matrix for Random Forest')
@@ -67,9 +73,12 @@ plt.xlabel('Predicted')
 plt.ylabel('Actual')
 plt.show()
 
-# XGBoost Confusion Matrix
+# XGBoost Confusion Matrix and F1 Score
 y_pred_xgb = best_xgb.predict(X_test)
 cm_xgb = confusion_matrix(y_test, y_pred_xgb)
+f1_xgb = f1_score(y_test, y_pred_xgb)
+print(f"XGBoost F1 Score: {f1_xgb}")
+
 plt.figure(figsize=(6, 4))
 sns.heatmap(cm_xgb, annot=True, fmt='d', cmap='Blues', xticklabels=['Fake', 'Real'], yticklabels=['Fake', 'Real'])
 plt.title('Confusion Matrix for XGBoost')
