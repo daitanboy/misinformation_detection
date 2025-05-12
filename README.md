@@ -43,14 +43,12 @@ This project uses machine learning and natural language processing (NLP) to dete
 
 ## Visualizations
 Included are confusion matrix visualizations and F1 score comparisons.
+- Visuals and evaluation results are saved in `reports/figures/`.
 
 ## License
 This project is licensed under the MIT License.
-rts NGOs and platforms in flagging misleading posts.
-- Visuals and evaluation results are saved in `reports/figures/`.
 
 ## Author
-
 Carlos Lopez Vento  
 Information Science @ University of Maryland  
 [GitHub Profile](https://github.com/daitanboy)
